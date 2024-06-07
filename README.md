@@ -10,3 +10,21 @@
 [![PyPI version](https://badge.fury.io/py/printo.svg)](https://badge.fury.io/py/printo)
 [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+
+
+A mini library for writing beautiful [`__repr__`](https://docs.python.org/3/reference/datamodel.html#object.__repr__) for your classes.
+
+Install it:
+
+```bash
+pip install printo
+```
+
+And use:
+
+```python
+from printo import descript_data_object
+
+print(descript_data_object('MyClassName', (1, 2, 'some text'), {'variable_name': 1, 'second_variable_name': 'kek'}))
+# > MyClassName(1, 2, "some text", variable_name=1, second_variable_name="kek")
+```
