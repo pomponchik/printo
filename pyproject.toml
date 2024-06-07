@@ -1,0 +1,45 @@
+[build-system]
+requires = ['setuptools==68.0.0']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'printo'
+version = '0.0.1'
+authors = [
+  { name='Evgeniy Blinov', email='zheni-b@yandex.ru' },
+]
+description = 'Print objects with data beautifully'
+readme = 'README.md'
+requires-python = '>=3.7'
+classifiers = [
+    'Operating System :: OS Independent',
+    'Operating System :: MacOS :: MacOS X',
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: POSIX',
+    'Operating System :: POSIX :: Linux',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'License :: OSI Approved :: MIT License',
+    'Intended Audience :: Developers',
+    'Topic :: Software Development :: Libraries',
+    'Typing :: Typed',
+]
+keywords = [
+    'print',
+    'serialization',
+]
+
+[tool.setuptools.package-data]
+"escape" = ["py.typed"]
+
+[tool.mutmut]
+paths_to_mutate="printo"
+runner="pytest"
+
+[project.urls]
+'Source' = 'https://github.com/pomponchik/printo'
+'Tracker' = 'https://github.com/pomponchik/printo/issues'
