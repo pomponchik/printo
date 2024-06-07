@@ -1,0 +1,13 @@
+__pycache__
+.pytest_cache
+.DS_Store
+test.py
+*.egg-info
+dist
+venv
+build
+.ruff_cache
+.mypy_cache
+.mutmut-cache
+html
+.coverage
