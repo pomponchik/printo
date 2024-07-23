@@ -26,5 +26,5 @@ And use:
 from printo import descript_data_object
 
 print(descript_data_object('MyClassName', (1, 2, 'some text'), {'variable_name': 1, 'second_variable_name': 'kek'}))
-# > MyClassName(1, 2, "some text", variable_name=1, second_variable_name="kek")
+# > MyClassName(1, 2, 'some text', variable_name=1, second_variable_name='kek')
 ```
