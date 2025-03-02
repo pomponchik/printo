@@ -30,6 +30,7 @@ classifiers = [
 ]
 keywords = [
     'print',
+    'repr',
     'serialization',
 ]
 
