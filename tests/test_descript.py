@@ -1,6 +1,6 @@
 from typing import Any
 
-from printo import descript_data_object
+from printo import descript_data_object, not_none
 
 
 def test_empty_object():
@@ -188,3 +188,7 @@ def test_set_real_filters_for_args_and_kwargs():
         return False
 
     assert descript_data_object('ClassName', (1, 2), {'lol': 1, 'kek': 2}, filters={'lol': not_all, 'kek': not_all, 0: not_all, 1: not_all}) == 'ClassName()'
+
+
+def test_filter_not_nones():
+    assert descript_data_object('ClassName', (1, 'lol', None), {'lol': 1, 'kek': None}, filters={'lol': not_none, 'kek': not_none, 0: not_none, 1: not_none, 2: not_none}) == "ClassName(1, 'lol', lol=1)"
