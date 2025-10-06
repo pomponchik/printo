@@ -107,7 +107,6 @@ def test_set_filters_dict_with_empty_lambdas_for_args():
     assert descript_data_object('ClassName', ('lol', 1, 2, 3, 'kek', None), {}, filters={0: all, 1: all, 2: all, 3: all, 4: all}) == "ClassName('lol', 1, 2, 3, 'kek', None)"
 
 
-
 def test_set_real_filters_for_args():
     not_all = lambda x: False
 
