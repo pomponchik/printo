@@ -1,4 +1,4 @@
-![logo](https://raw.githubusercontent.com/pomponchik/printo/main/docs/assets/logo_1.svg)
+![logo](https://raw.githubusercontent.com/pomponchik/printo/develop/docs/assets/logo_1.svg)
 
 [![Downloads](https://static.pepy.tech/badge/printo/month)](https://pepy.tech/project/printo)
 [![Downloads](https://static.pepy.tech/badge/printo)](https://pepy.tech/project/printo)
