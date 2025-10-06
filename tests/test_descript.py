@@ -152,35 +152,6 @@ def test_kwargs_filters_are_getting_values():
     assert fields == ['kek', 'lol']
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def test_set_empty_filters_dict_for_kwargs():
     assert descript_data_object('ClassName', (), {'lol': 1, 'kek': 2}, filters={}) == 'ClassName(lol=1, kek=2)'
 
@@ -188,7 +159,6 @@ def test_set_empty_filters_dict_for_kwargs():
 
     assert descript_data_object('ClassName', (), {'number_1': 1, 'number_2': 2, 'lol': 'insert text', 'kek': 'insert the second text'}, filters={}) == "ClassName(number_1=1, number_2=2, lol='insert text', kek='insert the second text')"
     assert descript_data_object('ClassName', (), {'number_1': 1, 'number_2': 2, 'lol': 'insert text', 'kek': 'insert the second text', 'number_3': 3}, filters={}) == "ClassName(number_1=1, number_2=2, lol='insert text', kek='insert the second text', number_3=3)"
-
 
 
 def test_set_filters_dict_with_empty_lambdas_for_kwargs():
