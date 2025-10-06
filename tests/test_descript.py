@@ -75,3 +75,56 @@ def test_set_serializator_for_kwargs():
 
     assert descript_data_object('ClassName', (), {'number_1': 1, 'number_2': 2, 'lol': 'insert text', 'kek': 'insert the second text'}, serializator=lambda x: f'{x}{x}') == 'ClassName(number_1=11, number_2=22, lol=insert textinsert text, kek=insert the second textinsert the second text)'
     assert descript_data_object('ClassName', (), {'number_1': 1, 'number_2': 2, 'lol': 'insert text', 'kek': 'insert the second text', 'number_3': 3}, serializator=lambda x: f'{x}{x}') == 'ClassName(number_1=11, number_2=22, lol=insert textinsert text, kek=insert the second textinsert the second text, number_3=33)'
+
+
+def test_set_empty_filters_dict_for_args():
+    assert descript_data_object('ClassName', (1, 2, 3), {}, filters={}) == 'ClassName(1, 2, 3)'
+    assert descript_data_object('ClassName', (1, 2), {}, filters={}) == 'ClassName(1, 2)'
+    assert descript_data_object('ClassName', (1,), {}, filters={}) == 'ClassName(1)'
+
+    assert descript_data_object('ClassName', ('lol', 'kek'), {}, filters={}) == "ClassName('lol', 'kek')"
+    assert descript_data_object('ClassName', ('lol',), {}, filters={}) == "ClassName('lol')"
+
+    assert descript_data_object('ClassName', ('lol', 1, 2, 3), {}, filters={}) == "ClassName('lol', 1, 2, 3)"
+    assert descript_data_object('ClassName', ('lol', 1, 2, 3, 'kek'), {}, filters={}) == "ClassName('lol', 1, 2, 3, 'kek')"
+    assert descript_data_object('ClassName', ('lol', 1, 2, 3, 'kek', None), {}, filters={}) == "ClassName('lol', 1, 2, 3, 'kek', None)"
+
+
+def test_set_filters_dict_with_empty_lambdas_for_args():
+    all = lambda x: True
+
+    assert descript_data_object('ClassName', (1, 2, 3), {}, filters={0: all, 1: all, 2: all}) == 'ClassName(1, 2, 3)'
+    assert descript_data_object('ClassName', (1, 2), {}, filters={0: all, 1: all}) == 'ClassName(1, 2)'
+    assert descript_data_object('ClassName', (1,), {}, filters={0: all}) == 'ClassName(1)'
+
+    assert descript_data_object('ClassName', ('lol', 'kek'), {}, filters={0: all, 1: all}) == "ClassName('lol', 'kek')"
+    assert descript_data_object('ClassName', ('lol',), {}, filters={0: all}) == "ClassName('lol')"
+
+    assert descript_data_object('ClassName', ('lol', 1, 2, 3), {}, filters={0: all, 1: all, 2: all}) == "ClassName('lol', 1, 2, 3)"
+    assert descript_data_object('ClassName', ('lol', 1, 2, 3, 'kek'), {}, filters={0: all, 1: all, 2: all, 3: all}) == "ClassName('lol', 1, 2, 3, 'kek')"
+    assert descript_data_object('ClassName', ('lol', 1, 2, 3, 'kek', None), {}, filters={0: all, 1: all, 2: all, 3: all, 4: all}) == "ClassName('lol', 1, 2, 3, 'kek', None)"
+
+
+
+def test_set_real_filters_for_args():
+    not_all = lambda x: False
+
+    assert descript_data_object('ClassName', (1, 2, 3), {}, filters={0: not_all, 1: not_all, 2: not_all}) == 'ClassName()'
+    assert descript_data_object('ClassName', (1,), {}, filters={0: not_all}) == 'ClassName()'
+    assert descript_data_object('ClassName', ('lol', 'kek'), {}, filters={0: not_all, 1: not_all}) == "ClassName()"
+    assert descript_data_object('ClassName', ('lol',), {}, filters={0: not_all}) == "ClassName()"
+
+    assert descript_data_object('ClassName', (1, 2, 3), {}, filters={0: not_all}) == 'ClassName(2, 3)'
+    assert descript_data_object('ClassName', (1, 2, 3), {}, filters={2: not_all}) == 'ClassName(1, 2)'
+    assert descript_data_object('ClassName', (1, 2, 3), {}, filters={1: not_all}) == 'ClassName(1, 3)'
+    assert descript_data_object('ClassName', (1, 2), {}, filters={0: not_all}) == 'ClassName(2)'
+    assert descript_data_object('ClassName', (1, 2), {}, filters={1: not_all}) == 'ClassName(1)'
+    assert descript_data_object('ClassName', (1, 2, 3), {}, filters={3: not_all}) == 'ClassName(1, 2, 3)'
+
+    assert descript_data_object('ClassName', ('lol', 'kek'), {}, filters={0: not_all}) == "ClassName('kek')"
+    assert descript_data_object('ClassName', ('lol', 'kek'), {}, filters={1: not_all}) == "ClassName('lol')"
+    assert descript_data_object('ClassName', ('lol',), {}, filters={1: not_all}) == "ClassName('lol')"
+
+
+def test_args_filters_are_getting_numbers_of_arguments():
+    pass
