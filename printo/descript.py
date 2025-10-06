@@ -14,10 +14,10 @@ def descript_data_object(
 
     kwargs_description = []
     for argument_name, value in kwargs.items():
-        kwargs_description.append(f"{argument_name}=" + serializator(value))
+        kwargs_description.append(f'{argument_name}=' + serializator(value))
     kwargs_description: str = ', '.join(kwargs_description_chunks)
 
-    breackets_content = ", ".join(
+    breackets_content = ', '.join(
         [x for x in (args_description, kwargs_description) if x]
     )
 
