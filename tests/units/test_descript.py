@@ -192,3 +192,22 @@ def test_set_real_filters_for_args_and_kwargs():
 
 def test_filter_not_nones():
     assert descript_data_object('ClassName', (1, 'lol', None), {'lol': 1, 'kek': None}, filters={'lol': not_none, 'kek': not_none, 0: not_none, 1: not_none, 2: not_none}) == "ClassName(1, 'lol', lol=1)"
+
+
+def test_named_functions_as_arguments():
+    def function():
+        pass
+
+    assert descript_data_object('ClassName', (1, 2, 3, function), {}) == 'ClassName(1, 2, 3, function)'
+    assert descript_data_object('ClassName', (function,), {}) == 'ClassName(function)'
+    assert descript_data_object('ClassName', (function,), {'function': function}) == 'ClassName(function, function=function)'
+    assert descript_data_object('ClassName', (), {'function': function}) == 'ClassName(function=function)'
+    assert descript_data_object('ClassName', (1, 2, 3, function), {'function': function}) == 'ClassName(1, 2, 3, function, function=function)'
+
+
+def test_lambdas_as_arguments():
+    assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {}) == 'ClassName(1, 2, 3, λ)'
+    assert descript_data_object('ClassName', (lambda x: x,), {}) == 'ClassName(λ)'
+    assert descript_data_object('ClassName', (lambda x: x,), {'function': lambda x: x}) == 'ClassName(λ, function=λ)'
+    assert descript_data_object('ClassName', (), {'function': lambda x: x}) == 'ClassName(function=λ)'
+    assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'function': lambda x: x}) == 'ClassName(1, 2, 3, λ, function=λ)'
