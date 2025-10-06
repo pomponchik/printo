@@ -2,7 +2,7 @@
 
 [![Downloads](https://static.pepy.tech/badge/printo/month)](https://pepy.tech/project/printo)
 [![Downloads](https://static.pepy.tech/badge/printo)](https://pepy.tech/project/printo)
-[![codecov](https://codecov.io/gh/pomponchik/printo/graph/badge.svg?token=r72d56t1hj)](https://codecov.io/gh/pomponchik/printo)
+[![Coverage Status](https://coveralls.io/repos/github/pomponchik/printo/badge.svg?branch=main)](https://coveralls.io/github/pomponchik/printo?branch=main)
 [![Lines of code](https://sloc.xyz/github/pomponchik/printo/?category=code)](https://github.com/boyter/scc/)
 [![Hits-of-Code](https://hitsofcode.com/github/pomponchik/printo?branch=main)](https://hitsofcode.com/github/pomponchik/printo/view?branch=main)
 [![Test-Package](https://github.com/pomponchik/printo/actions/workflows/tests_and_coverage.yml/badge.svg)](https://github.com/pomponchik/printo/actions/workflows/tests_and_coverage.yml)
