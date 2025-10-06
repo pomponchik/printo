@@ -1,11 +1,13 @@
 from typing import Tuple, Dict, Callable, Union, Optional, Any
 
+from printo.reprs import superrepr
+
 
 def descript_data_object(
     class_name: str,
     args: Tuple[Any, ...],
     kwargs: Dict[str, Any],
-    serializator: Callable[[Any], str] = repr,
+    serializator: Callable[[Any], str] = superrepr,
     filters: Optional[Dict[Union[str, int], Callable[[Any], bool]]] = None,
 ) -> str:
     real_filters: Dict[Union[str, int], Callable[[Any], bool]] = (
