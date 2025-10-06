@@ -1,4 +1,4 @@
-from typing import Tuple, Dict, Callable, Any
+from typing import Tuple, Dict, Callable, Union, Optional, Any
 
 
 def descript_data_object(
@@ -6,15 +6,16 @@ def descript_data_object(
     args: Tuple[Any, ...],
     kwargs: Dict[str, Any],
     serializator: Callable[[Any], str] = repr,
+    filters: Optional[Dict[Union[str, int], Callable[[Any], bool]]] = None,
 ) -> str:
     args_description_chunks = []
     for argument in args:
         args_description_chunks.append(serializator(argument))
     args_description: str = ', '.join(args_description_chunks)
 
-    kwargs_description = []
+    kwargs_description_chunks = []
     for argument_name, value in kwargs.items():
-        kwargs_description.append(f'{argument_name}=' + serializator(value))
+        kwargs_description_chunks.append(f'{argument_name}=' + serializator(value))
     kwargs_description: str = ', '.join(kwargs_description_chunks)
 
     breackets_content = ', '.join(
