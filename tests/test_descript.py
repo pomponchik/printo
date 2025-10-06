@@ -1,3 +1,5 @@
+from typing import Any
+
 from printo import descript_data_object
 
 
@@ -126,5 +128,89 @@ def test_set_real_filters_for_args():
     assert descript_data_object('ClassName', ('lol',), {}, filters={1: not_all}) == "ClassName('lol')"
 
 
-def test_args_filters_are_getting_numbers_of_arguments():
-    pass
+def test_args_filters_are_getting_values():
+    fields = []
+
+    def add_to_fields(value: Any) -> bool:
+        fields.append(value)
+        return True
+
+    assert descript_data_object('ClassName', ('lol', 1, 2, 3, 'kek', None), {}, filters={0: add_to_fields, 1: add_to_fields, 2: add_to_fields, 3: add_to_fields, 4: add_to_fields, 5: add_to_fields}) == "ClassName('lol', 1, 2, 3, 'kek', None)"
+
+    assert fields == ['lol', 1, 2, 3, 'kek', None]
+
+
+def test_kwargs_filters_are_getting_values():
+    fields = []
+
+    def add_to_fields(value: Any) -> bool:
+        fields.append(value)
+        return True
+
+    assert descript_data_object('ClassName', (), {'lol': 'kek', 'kek': 'lol'}, filters={'lol': add_to_fields, 'kek': add_to_fields}) == "ClassName(lol='kek', kek='lol')"
+
+    assert fields == ['kek', 'lol']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def test_set_empty_filters_dict_for_kwargs():
+    assert descript_data_object('ClassName', (), {'lol': 1, 'kek': 2}, filters={}) == 'ClassName(lol=1, kek=2)'
+
+    assert descript_data_object('ClassName', (), {'lol': 'insert text', 'kek': 'insert the second text'}, filters={}) == "ClassName(lol='insert text', kek='insert the second text')"
+
+    assert descript_data_object('ClassName', (), {'number_1': 1, 'number_2': 2, 'lol': 'insert text', 'kek': 'insert the second text'}, filters={}) == "ClassName(number_1=1, number_2=2, lol='insert text', kek='insert the second text')"
+    assert descript_data_object('ClassName', (), {'number_1': 1, 'number_2': 2, 'lol': 'insert text', 'kek': 'insert the second text', 'number_3': 3}, filters={}) == "ClassName(number_1=1, number_2=2, lol='insert text', kek='insert the second text', number_3=3)"
+
+
+
+def test_set_filters_dict_with_empty_lambdas_for_kwargs():
+    all = lambda x: True
+
+    assert descript_data_object('ClassName', (), {'lol': 1, 'kek': 2}, filters={'lol': all, 'kek': all}) == 'ClassName(lol=1, kek=2)'
+
+    assert descript_data_object('ClassName', (), {'lol': 'insert text', 'kek': 'insert the second text'}, filters={'lol': all, 'kek': all}) == "ClassName(lol='insert text', kek='insert the second text')"
+
+    assert descript_data_object('ClassName', (), {'number_1': 1, 'number_2': 2, 'lol': 'insert text', 'kek': 'insert the second text'}, filters={'lol': all, 'kek': all}) == "ClassName(number_1=1, number_2=2, lol='insert text', kek='insert the second text')"
+    assert descript_data_object('ClassName', (), {'number_1': 1, 'number_2': 2, 'lol': 'insert text', 'kek': 'insert the second text', 'number_3': 3}, filters={'lol': all, 'kek': all}) == "ClassName(number_1=1, number_2=2, lol='insert text', kek='insert the second text', number_3=3)"
+
+
+def test_set_real_filters_for_kwargs():
+    not_all = lambda x: False
+
+    assert descript_data_object('ClassName', (), {'lol': 1, 'kek': 2}, filters={'lol': not_all, 'kek': not_all}) == 'ClassName()'
+    assert descript_data_object('ClassName', (), {'lol': 1, 'kek': 2}, filters={'lol': not_all}) == 'ClassName(kek=2)'
+    assert descript_data_object('ClassName', (), {'lol': 1, 'kek': 2}, filters={'kek': not_all}) == 'ClassName(lol=1)'
+
+
+def test_set_real_filters_for_args_and_kwargs():
+    not_all = lambda x: False
+
+    assert descript_data_object('ClassName', (1, 2), {'lol': 1, 'kek': 2}, filters={'lol': not_all, 'kek': not_all, 0: not_all, 1: not_all}) == 'ClassName()'
