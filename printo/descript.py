@@ -17,17 +17,17 @@ def descript_data_object(
         filter = real_filters.get(index, lambda x: True)
         if filter(argument):
             args_description_chunks.append(serializator(argument))
-    args_description: str = ", ".join(args_description_chunks)
+    args_description: str = ', '.join(args_description_chunks)
 
     kwargs_description_chunks = []
     for argument_name, value in kwargs.items():
         filter = real_filters.get(argument_name, lambda x: True)
         if filter(value):
-            kwargs_description_chunks.append(f"{argument_name}=" + serializator(value))
-    kwargs_description: str = ", ".join(kwargs_description_chunks)
+            kwargs_description_chunks.append(f'{argument_name}=' + serializator(value))
+    kwargs_description: str = ', '.join(kwargs_description_chunks)
 
-    breackets_content = ", ".join(
+    breackets_content = ', '.join(
         [x for x in (args_description, kwargs_description) if x]
     )
 
-    return f"{class_name}({breackets_content})"
+    return f'{class_name}({breackets_content})'
