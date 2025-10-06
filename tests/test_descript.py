@@ -93,7 +93,8 @@ def test_set_empty_filters_dict_for_args():
 
 
 def test_set_filters_dict_with_empty_lambdas_for_args():
-    all = lambda x: True
+    def all(x):
+        return True
 
     assert descript_data_object('ClassName', (1, 2, 3), {}, filters={0: all, 1: all, 2: all}) == 'ClassName(1, 2, 3)'
     assert descript_data_object('ClassName', (1, 2), {}, filters={0: all, 1: all}) == 'ClassName(1, 2)'
@@ -108,7 +109,8 @@ def test_set_filters_dict_with_empty_lambdas_for_args():
 
 
 def test_set_real_filters_for_args():
-    not_all = lambda x: False
+    def not_all(x):
+        return False
 
     assert descript_data_object('ClassName', (1, 2, 3), {}, filters={0: not_all, 1: not_all, 2: not_all}) == 'ClassName()'
     assert descript_data_object('ClassName', (1,), {}, filters={0: not_all}) == 'ClassName()'
@@ -161,7 +163,8 @@ def test_set_empty_filters_dict_for_kwargs():
 
 
 def test_set_filters_dict_with_empty_lambdas_for_kwargs():
-    all = lambda x: True
+    def all(x):
+        return True
 
     assert descript_data_object('ClassName', (), {'lol': 1, 'kek': 2}, filters={'lol': all, 'kek': all}) == 'ClassName(lol=1, kek=2)'
 
@@ -172,7 +175,8 @@ def test_set_filters_dict_with_empty_lambdas_for_kwargs():
 
 
 def test_set_real_filters_for_kwargs():
-    not_all = lambda x: False
+    def not_all(x):
+        return False
 
     assert descript_data_object('ClassName', (), {'lol': 1, 'kek': 2}, filters={'lol': not_all, 'kek': not_all}) == 'ClassName()'
     assert descript_data_object('ClassName', (), {'lol': 1, 'kek': 2}, filters={'lol': not_all}) == 'ClassName(kek=2)'
@@ -180,6 +184,7 @@ def test_set_real_filters_for_kwargs():
 
 
 def test_set_real_filters_for_args_and_kwargs():
-    not_all = lambda x: False
+    def not_all(x):
+        return False
 
     assert descript_data_object('ClassName', (1, 2), {'lol': 1, 'kek': 2}, filters={'lol': not_all, 'kek': not_all, 0: not_all, 1: not_all}) == 'ClassName()'
