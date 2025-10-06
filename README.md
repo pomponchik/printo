@@ -47,7 +47,7 @@ Here's a simple example of how it works:
 from printo import descript_data_object
 
 print(descript_data_object('MyClassName', (1, 2, 'some text'), {'variable_name': 1, 'second_variable_name': 'kek'}))
-# > MyClassName(1, 2, 'some text', variable_name=1, second_variable_name='kek')
+#> MyClassName(1, 2, 'some text', variable_name=1, second_variable_name='kek')
 ```
 
 ## Filtering
@@ -56,7 +56,7 @@ You can prevent individual fields from being displayed. To do this, pass a `dict
 
 ```python
 print(descript_data_object('MyClassName', (1, 2, 'some text'), {'variable_name': 1, 'second_variable_name': 'kek'}, filters={1: lambda x: False if x == 2 else True, 'second_variable_name': lambda x: False}))
-# > MyClassName(1, 'some text', variable_name=1)
+#> MyClassName(1, 'some text', variable_name=1)
 ```
 
 You can also save a few characters by specifying a function as a filter that automatically filters `None` of the values:
@@ -65,7 +65,7 @@ You can also save a few characters by specifying a function as a filter that aut
 from printo import not_none
 
 print(descript_data_object('MyClassName', (1, None), {}, filters={1: not_none}))
-# > MyClassName(1)
+#> MyClassName(1)
 ```
 
 ## Custom display of objects
