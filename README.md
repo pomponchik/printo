@@ -19,7 +19,7 @@ There is an implicit agreement among pythonists to create special [`__repr__`](h
 - [**Installation**](#installation)
 - [**Basic usage**](#basic-usage)
 - [**Filtering**](#filtering)
-- [**Custom display of objects**](#сustom-display-of-objects)
+- [**Custom display of objects**](#custom-display-of-objects)
 
 
 ## Installation
