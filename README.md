@@ -50,6 +50,7 @@ print(descript_data_object('MyClassName', (1, 2, 'some text'), {'variable_name':
 #> MyClassName(1, 2, 'some text', variable_name=1, second_variable_name='kek')
 ```
 
+
 ## Filtering
 
 You can prevent individual fields from being displayed. To do this, pass a `dict` as the `filters` parameter, in which the argument numbers (counting starts from 0) for positional arguments or the argument names for named arguments will be used as keys, and returning `bool` functions (each of them answers the question "whether to display this argument", where `True` means "yes" and `False` means "no") will be used as values:
@@ -67,6 +68,7 @@ from printo import not_none
 print(descript_data_object('MyClassName', (1, None), {}, filters={1: not_none}))
 #> MyClassName(1)
 ```
+
 
 ## Custom display of objects
 
