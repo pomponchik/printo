@@ -39,7 +39,9 @@ jobs:
         run: pip list
 
       - name: Run tests and show coverage on the command line
-        run: coverage run --source=printo --omit="*tests*" -m pytest --cache-clear --assert=plain && coverage report -m --fail-under=100
+        run: |
+          coverage run --source=printo --omit="*tests*" -m pytest --cache-clear --assert=plain && coverage report -m --fail-under=100
+          coverage xml
 
       - name: Upload coverage to Coveralls
         if: runner.os == 'Linux'
