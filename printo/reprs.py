@@ -1,4 +1,3 @@
-from this import s
 from typing import Any
 from inspect import isfunction
 
