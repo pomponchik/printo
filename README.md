@@ -19,8 +19,8 @@ There is an implicit agreement among pythonists to create special [`__repr__`](h
 - [**Installation**](#installation)
 - [**Basic usage**](#basic-usage)
 - [**Filtering**](#filtering)
-- [**Placeholders**](#placeholders)
 - [**Custom display of objects**](#custom-display-of-objects)
+- [**Placeholders**](#placeholders)
 
 
 ## Installation
@@ -71,6 +71,28 @@ print(descript_data_object('MyClassName', (1, None), {}, filters={1: not_none}))
 ```
 
 
+## Custom display of objects
+
+By default, all your objects are serialized in the same way as the standard [`repr`](https://docs.python.org/3/library/functions.html#repr) function does. There are only 2 exceptions:
+
+- Ordinary functions, in their case, instead of the usual text, just the function name is displayed.
+- Lambda functions, just the `λ` symbol is displayed instead. This is done because there is no reliable way to display the source code of a lambda function in Python.
+
+You can use your own function as a repr for all your objects, use the `serializator` parameter for this:
+
+```python
+print(
+    descript_data_object(
+        'MyClassName',
+        (1, 2, 'lol'),
+        {'variable_name': 1, 'second_variable_name': 'kek'},
+        serializator=lambda x: repr(x * 2),
+    )
+)
+#> MyClassName(2, 4, 'lollol', variable_name=2, second_variable_name='kekkek')
+```
+
+
 ## Placeholders
 
 For individual fields, you can pass predefined strings that will be displayed instead of the actual values. This can be useful, for example, to hide the values of secret fields when serializing objects.
@@ -92,24 +114,4 @@ print(
 #> MySuperClass(1, ***, 'lol', variable_name=***, second_variable_name='kek')
 ```
 
-
-## Custom display of objects
-
-By default, all your objects are serialized in the same way as the standard [`repr`](https://docs.python.org/3/library/functions.html#repr) function does. There are only 2 exceptions:
-
-- Ordinary functions, in their case, instead of the usual text, just the function name is displayed.
-- Lambda functions, just the `λ` symbol is displayed instead. This is done because there is no reliable way to display the source code of a lambda function in Python.
-
-You can use your own function as a repr for all your objects, use the `serializator` parameter for this:
-
-```python
-print(
-    descript_data_object(
-        'MyClassName',
-        (1, 2, 'lol'),
-        {'variable_name': 1, 'second_variable_name': 'kek'},
-        serializator=lambda x: repr(x * 2),
-    )
-)
-#> MyClassName(2, 4, 'lollol', variable_name=2, second_variable_name='kekkek')
-```
+> 🤓 Please note that if you set a placeholder for a parameter, a [custom serializer](#custom-display-of-objects) will no longer be applied to it.
