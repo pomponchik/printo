@@ -19,7 +19,8 @@ There is an implicit agreement among pythonists to create special [`__repr__`](h
 - [**Installation**](#installation)
 - [**Basic usage**](#basic-usage)
 - [**Filtering**](#filtering)
-- [**Custom display of objects**](#сustom-display-of-objects)
+- [**Custom display of objects**](#custom-display-of-objects)
+- [**Placeholders**](#placeholders)
 
 
 ## Installation
@@ -80,8 +81,6 @@ By default, all your objects are serialized in the same way as the standard [`re
 You can use your own function as a repr for all your objects, use the `serializator` parameter for this:
 
 ```python
-from printo import descript_data_object
-
 print(
     descript_data_object(
         'MyClassName',
@@ -92,3 +91,27 @@ print(
 )
 #> MyClassName(2, 4, 'lollol', variable_name=2, second_variable_name='kekkek')
 ```
+
+
+## Placeholders
+
+For individual fields, you can pass predefined strings that will be displayed instead of the actual values. This can be useful, for example, to hide the values of secret fields when serializing objects.
+
+Use the `placeholders` parameter for this by passing a dictionary there, where the keys are parameter names (for named parameters) or their numbers (for positional parameters, numbering starts from 0), and the values are strings:
+
+```python
+print(
+    descript_data_object(
+        'MySuperClass',
+        (1, 2, 'lol'),
+        {'variable_name': 1, 'second_variable_name': 'kek'},
+        placeholders={
+            1: '***',
+            'variable_name': '***',
+        },
+    )
+)
+#> MySuperClass(1, ***, 'lol', variable_name=***, second_variable_name='kek')
+```
+
+> 🤓 Please note that if you set a placeholder for a parameter, a [custom serializer](#custom-display-of-objects) will no longer be applied to it.

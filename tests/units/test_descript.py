@@ -69,6 +69,8 @@ def test_set_serializator_for_args():
     assert descript_data_object('ClassName', ('lol', 1, 2, 3, 'kek'), {}, serializator=lambda x: f'{x}{x}') == 'ClassName(lollol, 11, 22, 33, kekkek)'
     assert descript_data_object('ClassName', ('lol', 1, 2, 3, 'kek', None), {}, serializator=lambda x: f'{x}{x}') == 'ClassName(lollol, 11, 22, 33, kekkek, NoneNone)'
 
+    assert descript_data_object('ClassName', ('lol', 1, 2, 3, 'kek', None), {}, serializator=lambda x: f'{x}{x}', placeholders={1: 'kek'}) == 'ClassName(lollol, kek, 22, 33, kekkek, NoneNone)'
+
 
 def test_set_serializator_for_kwargs():
     assert descript_data_object('ClassName', (), {'lol': 1, 'kek': 2}, serializator=lambda x: f'{x}{x}') == 'ClassName(lol=11, kek=22)'
@@ -77,6 +79,8 @@ def test_set_serializator_for_kwargs():
 
     assert descript_data_object('ClassName', (), {'number_1': 1, 'number_2': 2, 'lol': 'insert text', 'kek': 'insert the second text'}, serializator=lambda x: f'{x}{x}') == 'ClassName(number_1=11, number_2=22, lol=insert textinsert text, kek=insert the second textinsert the second text)'
     assert descript_data_object('ClassName', (), {'number_1': 1, 'number_2': 2, 'lol': 'insert text', 'kek': 'insert the second text', 'number_3': 3}, serializator=lambda x: f'{x}{x}') == 'ClassName(number_1=11, number_2=22, lol=insert textinsert text, kek=insert the second textinsert the second text, number_3=33)'
+
+    assert descript_data_object('ClassName', (), {'number_1': 1, 'number_2': 2, 'lol': 'insert text', 'kek': 'insert the second text', 'number_3': 3}, serializator=lambda x: f'{x}{x}', placeholders={'lol': 'kek'}) == 'ClassName(number_1=11, number_2=22, lol=kek, kek=insert the second textinsert the second text, number_3=33)'
 
 
 def test_set_empty_filters_dict_for_args():
@@ -211,3 +215,14 @@ def test_lambdas_as_arguments():
     assert descript_data_object('ClassName', (lambda x: x,), {'function': lambda x: x}) == 'ClassName(λ, function=λ)'
     assert descript_data_object('ClassName', (), {'function': lambda x: x}) == 'ClassName(function=λ)'
     assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'function': lambda x: x}) == 'ClassName(1, 2, 3, λ, function=λ)'
+
+
+def test_simple_placeholders():
+    assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'lol': 'kek'}, placeholders={}) == 'ClassName(1, 2, 3, λ, lol=\'kek\')'
+    assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'lol': 'kek'}, placeholders=None) == 'ClassName(1, 2, 3, λ, lol=\'kek\')'
+    assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'lol': 'kek'}, placeholders={'lol': '***'}) == 'ClassName(1, 2, 3, λ, lol=***)'
+    assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'lol': 'kek', 'kek': 'lol'}, placeholders={'lol': '***'}) == 'ClassName(1, 2, 3, λ, lol=***, kek=\'lol\')'
+    assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'lol': 'kek', 'kek': 'lol'}, placeholders={'lol': '***', 0: '***'}) == 'ClassName(***, 2, 3, λ, lol=***, kek=\'lol\')'
+    assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'lol': 'kek', 'kek': 'lol'}, placeholders={'lol': '***', 0: '***', 3: '***'}) == 'ClassName(***, 2, 3, ***, lol=***, kek=\'lol\')'
+    assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'lol': 'kek', 'kek': 'lol'}, placeholders={'lol': '***', 0: '***', 3: '***', 'kek': '&'}) == 'ClassName(***, 2, 3, ***, lol=***, kek=&)'
+    assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'lol': 'kek', 'kek': 'lol'}, placeholders={'lol': '🔒', 0: '***', 3: '***', 'kek': '&'}) == 'ClassName(***, 2, 3, ***, lol=🔒, kek=&)'
