@@ -89,7 +89,7 @@ print(
         },
     )
 )
-#> MySuperClass(2, ***, 'lollol', variable_name=***, second_variable_name='kekkek')
+#> MySuperClass(1, ***, 'lol', variable_name=***, second_variable_name='kek')
 ```
 
 
