@@ -14,7 +14,7 @@ def descript_data_object(
     real_filters: Dict[Union[str, int], Callable[[Any], bool]] = (
         filters if filters is not None else {}
     )
-    get_placehlder: Callable[[str], Optional[str]] = lambda field_name: placeholders.get(field_name) if placeholders is not None else None
+    get_placehlder: Callable[[Union[str, int]], Optional[str]] = lambda field_name: placeholders.get(field_name) if placeholders is not None else None
 
     args_description_chunks = []
     for index, argument in enumerate(args):
