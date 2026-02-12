@@ -30,7 +30,7 @@ There is an implicit agreement among pythonists to create special [`__repr__`](h
 
 ## Installation
 
-You can install [`dirstree`](https://pypi.python.org/pypi/printo) using pip:
+You can install [`printo`](https://pypi.python.org/pypi/printo) using pip:
 
 ```bash
 pip install printo
