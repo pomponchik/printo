@@ -1,4 +1,5 @@
-![logo](https://raw.githubusercontent.com/pomponchik/printo/develop/docs/assets/logo_1.svg)
+<details>
+  <summary>ⓘ</summary>
 
 [![Downloads](https://static.pepy.tech/badge/printo/month)](https://pepy.tech/project/printo)
 [![Downloads](https://static.pepy.tech/badge/printo)](https://pepy.tech/project/printo)
@@ -11,7 +12,11 @@
 [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-There is an implicit agreement among pythonists to create special [`__repr__`](https://docs.python.org/3/reference/datamodel.html#object.__repr__) methods for classes that return text as similar as possible to the piece of code where the specific object was constructed. `__repr__` of `1` returns "1", and repr of `None` returns "None". With this library, you can create your own classes, the objects of which will obey this rule.
+</details>
+
+![logo](https://raw.githubusercontent.com/pomponchik/printo/develop/docs/assets/logo_1.svg)
+
+There is an implicit agreement among pythonists to create special [`__repr__`](https://docs.python.org/3/reference/datamodel.html#object.__repr__) methods for classes that return text as similar as possible to the piece of code where the specific object was constructed. `__repr__` of `1` returns `"1"`, and repr of `None` returns `"None"`. With this library, you can create your own classes, the objects of which will obey this rule.
 
 
 ## Table of contents
