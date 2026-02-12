@@ -1,5 +1,7 @@
 from typing import Any
 
+import pytest
+
 from printo import descript_data_object, not_none
 
 
@@ -8,17 +10,24 @@ def test_empty_object():
     assert descript_data_object('ClassName', (), {}, serializator=lambda x: 'kek') == 'ClassName()'
 
 
-def test_only_args():
-    assert descript_data_object('ClassName', (1, 2, 3), {}) == 'ClassName(1, 2, 3)'
-    assert descript_data_object('ClassName', (1, 2), {}) == 'ClassName(1, 2)'
-    assert descript_data_object('ClassName', (1,), {}) == 'ClassName(1)'
+@pytest.mark.parametrize(
+    'args_converter',
+    [
+        lambda x: x,
+        list,
+    ],
+)
+def test_only_args(args_converter):
+    assert descript_data_object('ClassName', args_converter((1, 2, 3)), {}) == 'ClassName(1, 2, 3)'
+    assert descript_data_object('ClassName', args_converter((1, 2)), {}) == 'ClassName(1, 2)'
+    assert descript_data_object('ClassName', args_converter((1,)), {}) == 'ClassName(1)'
 
-    assert descript_data_object('ClassName', ('lol', 'kek'), {}) == "ClassName('lol', 'kek')"
-    assert descript_data_object('ClassName', ('lol',), {}) == "ClassName('lol')"
+    assert descript_data_object('ClassName', args_converter(('lol', 'kek')), {}) == "ClassName('lol', 'kek')"
+    assert descript_data_object('ClassName', args_converter(('lol',)), {}) == "ClassName('lol')"
 
-    assert descript_data_object('ClassName', ('lol', 1, 2, 3), {}) == "ClassName('lol', 1, 2, 3)"
-    assert descript_data_object('ClassName', ('lol', 1, 2, 3, 'kek'), {}) == "ClassName('lol', 1, 2, 3, 'kek')"
-    assert descript_data_object('ClassName', ('lol', 1, 2, 3, 'kek', None), {}) == "ClassName('lol', 1, 2, 3, 'kek', None)"
+    assert descript_data_object('ClassName', args_converter(('lol', 1, 2, 3)), {}) == "ClassName('lol', 1, 2, 3)"
+    assert descript_data_object('ClassName', args_converter(('lol', 1, 2, 3, 'kek')), {}) == "ClassName('lol', 1, 2, 3, 'kek')"
+    assert descript_data_object('ClassName', args_converter(('lol', 1, 2, 3, 'kek', None)), {}) == "ClassName('lol', 1, 2, 3, 'kek', None)"
 
 
 def test_only_kwargs():
