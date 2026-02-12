@@ -47,7 +47,13 @@ Here's a simple example of how it works:
 ```python
 from printo import descript_data_object
 
-print(descript_data_object('MyClassName', (1, 2, 'some text'), {'variable_name': 1, 'second_variable_name': 'kek'}))
+print(
+    descript_data_object(
+        'MyClassName',
+        (1, 2, 'some text'),
+        {'variable_name': 1, 'second_variable_name': 'kek'},
+    )
+)
 #> MyClassName(1, 2, 'some text', variable_name=1, second_variable_name='kek')
 ```
 
@@ -57,7 +63,14 @@ print(descript_data_object('MyClassName', (1, 2, 'some text'), {'variable_name':
 You can prevent individual fields from being displayed. To do this, pass a `dict` as the `filters` parameter, in which the argument numbers (counting starts from 0) for positional arguments or the argument names for named arguments will be used as keys, and returning `bool` functions (each of them answers the question "whether to display this argument", where `True` means "yes" and `False` means "no") will be used as values:
 
 ```python
-print(descript_data_object('MyClassName', (1, 2, 'some text'), {'variable_name': 1, 'second_variable_name': 'kek'}, filters={1: lambda x: False if x == 2 else True, 'second_variable_name': lambda x: False}))
+print(
+    descript_data_object(
+        'MyClassName',
+        (1, 2, 'some text'),
+        {'variable_name': 1, 'second_variable_name': 'kek'},
+        filters={1: lambda x: False if x == 2 else True, 'second_variable_name': lambda x: False},
+    )
+)
 #> MyClassName(1, 'some text', variable_name=1)
 ```
 
@@ -66,7 +79,14 @@ You can also save a few characters by specifying a function as a filter that aut
 ```python
 from printo import not_none
 
-print(descript_data_object('MyClassName', (1, None), {}, filters={1: not_none}))
+print(
+    descript_data_object(
+        'MyClassName',
+        (1, None),
+        {},
+        filters={1: not_none},
+    )
+)
 #> MyClassName(1)
 ```
 
