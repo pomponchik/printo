@@ -10,7 +10,7 @@ def test_basic_filtering():
         'MyClassName',
         (1, 2, 'some text'),
         {'variable_name': 1, 'second_variable_name': 'kek'},
-        filters={1: lambda x: False if x == 2 else True, 'second_variable_name': lambda x: False},
+        filters={1: lambda x: x != 2, 'second_variable_name': lambda x: False},  # noqa: ARG005
     ) == "MyClassName(1, 'some text', variable_name=1)"
 
 
