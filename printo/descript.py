@@ -1,9 +1,9 @@
-from typing import Tuple, List, Dict, Callable, Union, Optional, Any
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from printo.reprs import superrepr
 
 
-def descript_data_object(
+def descript_data_object(  # noqa: PLR0913
     class_name: str,
     args: Union[Tuple[Any, ...], List[Any]],
     kwargs: Dict[str, Any],
@@ -18,8 +18,8 @@ def descript_data_object(
 
     args_description_chunks = []
     for index, argument in enumerate(args):
-        filter = real_filters.get(index, lambda x: True)
-        if filter(argument):
+        decider = real_filters.get(index, lambda x: True)  # noqa: ARG005
+        if decider(argument):
             placeholder = get_placehlder(index)
             if placeholder is not None:
                 serialized_value = placeholder
@@ -30,8 +30,8 @@ def descript_data_object(
 
     kwargs_description_chunks = []
     for argument_name, value in kwargs.items():
-        filter = real_filters.get(argument_name, lambda x: True)
-        if filter(value):
+        decider = real_filters.get(argument_name, lambda x: True)  # noqa: ARG005
+        if decider(value):
             placeholder = get_placehlder(argument_name)
             if placeholder is not None:
                 serialized_value = placeholder
@@ -41,7 +41,7 @@ def descript_data_object(
     kwargs_description: str = ', '.join(kwargs_description_chunks)
 
     breackets_content = ', '.join(
-        [x for x in (args_description, kwargs_description) if x]
+        [x for x in (args_description, kwargs_description) if x],
     )
 
     return f'{class_name}({breackets_content})'

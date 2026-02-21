@@ -1,5 +1,5 @@
-from typing import Any
 from inspect import isfunction
+from typing import Any
 
 
 def superrepr(value: Any) -> str:
