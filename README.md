@@ -3,10 +3,10 @@
 
 [![Downloads](https://static.pepy.tech/badge/printo/month)](https://pepy.tech/project/printo)
 [![Downloads](https://static.pepy.tech/badge/printo)](https://pepy.tech/project/printo)
-[![Coverage Status](https://coveralls.io/repos/github/pomponchik/printo/badge.svg?branch=main)](https://coveralls.io/github/pomponchik/printo?branch=main)
-[![Lines of code](https://sloc.xyz/github/pomponchik/printo/?category=code)](https://github.com/boyter/scc/)
-[![Hits-of-Code](https://hitsofcode.com/github/pomponchik/printo?branch=main)](https://hitsofcode.com/github/pomponchik/printo/view?branch=main)
-[![Test-Package](https://github.com/pomponchik/printo/actions/workflows/tests_and_coverage.yml/badge.svg)](https://github.com/pomponchik/printo/actions/workflows/tests_and_coverage.yml)
+[![Coverage Status](https://coveralls.io/repos/github/mutating/printo/badge.svg?branch=main)](https://coveralls.io/github/mutating/printo?branch=main)
+[![Lines of code](https://sloc.xyz/github/mutating/printo/?category=code)](https://github.com/boyter/scc/)
+[![Hits-of-Code](https://hitsofcode.com/github/mutating/printo?branch=main)](https://hitsofcode.com/github/mutating/printo/view?branch=main)
+[![Test-Package](https://github.com/mutating/printo/actions/workflows/tests_and_coverage.yml/badge.svg)](https://github.com/mutating/printo/actions/workflows/tests_and_coverage.yml)
 [![Python versions](https://img.shields.io/pypi/pyversions/printo.svg)](https://pypi.python.org/pypi/printo)
 [![PyPI version](https://badge.fury.io/py/printo.svg)](https://badge.fury.io/py/printo)
 [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
@@ -14,7 +14,7 @@
 
 </details>
 
-![logo](https://raw.githubusercontent.com/pomponchik/printo/develop/docs/assets/logo_1.svg)
+![logo](https://raw.githubusercontent.com/mutating/printo/develop/docs/assets/logo_1.svg)
 
 There is an implicit agreement among pythonists to create special [`__repr__`](https://docs.python.org/3/reference/datamodel.html#object.__repr__) methods for classes that return text as similar as possible to the piece of code where the specific object was constructed. `__repr__` of `1` returns `"1"`, and repr of `None` returns `"None"`. With this library, you can create your own classes, the objects of which will obey this rule.
 
