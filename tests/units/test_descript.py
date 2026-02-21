@@ -241,3 +241,8 @@ def test_simple_placeholders():
 def test_wrong_serializator_callback():
     with pytest.raises(SignatureMismatchError):
         descript_data_object('ClassName', (1, 2, 3), {'lol': 'kek'}, serializator=lambda x, y: x + y)
+
+
+def test_wrong_filter_callback():
+    with pytest.raises(SignatureMismatchError):
+        descript_data_object('ClassName', (), {'lol': 1, 'kek': 2}, filters={'kek': lambda x, y: x + y})

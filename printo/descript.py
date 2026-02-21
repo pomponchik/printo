@@ -35,6 +35,7 @@ def descript_data_object(  # noqa: PLR0913
     kwargs_description_chunks = []
     for argument_name, value in kwargs.items():
         decider = real_filters.get(argument_name, lambda x: True)  # noqa: ARG005
+        PossibleCallMatcher('.').match(decider, raise_exception=True)
         if decider(value):
             placeholder = get_placeholder(argument_name)
             if placeholder is not None:
