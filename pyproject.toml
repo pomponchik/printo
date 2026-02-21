@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = 'printo'
-version = '0.0.11'
+version = '0.0.12'
 authors = [
   { name='Evgeniy Blinov', email='zheni-b@yandex.ru' },
 ]
@@ -53,5 +53,5 @@ lint.select = ["ERA001", "YTT", "ASYNC", "BLE", "B", "A", "COM", "INP", "PIE", "
 format.quote-style = "single"
 
 [project.urls]
-'Source' = 'https://github.com/pomponchik/printo'
-'Tracker' = 'https://github.com/pomponchik/printo/issues'
+'Source' = 'https://github.com/mutating/printo'
+'Tracker' = 'https://github.com/mutating/printo/issues'
