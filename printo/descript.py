@@ -11,7 +11,7 @@ def descript_data_object(  # noqa: PLR0913
     filters: Optional[Dict[Union[str, int], Callable[[Any], bool]]] = None,
     placeholders: Optional[Dict[Union[str, int], str]] = None,
 ) -> str:
-    from sigmatch import PossibleCallMatcher
+    from sigmatch import PossibleCallMatcher  # noqa: PLC0415
 
     PossibleCallMatcher('.').match(serializator, raise_exception=True)
 
