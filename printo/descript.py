@@ -18,13 +18,13 @@ def descript_data_object(  # noqa: PLR0913
     real_filters: Dict[Union[str, int], Callable[[Any], bool]] = (
         filters if filters is not None else {}
     )
-    get_placehlder: Callable[[Union[str, int]], Optional[str]] = lambda field_name: placeholders.get(field_name) if placeholders is not None else None
+    get_placeholder: Callable[[Union[str, int]], Optional[str]] = lambda field_name: placeholders.get(field_name) if placeholders is not None else None
 
     args_description_chunks = []
     for index, argument in enumerate(args):
         decider = real_filters.get(index, lambda x: True)  # noqa: ARG005
         if decider(argument):
-            placeholder = get_placehlder(index)
+            placeholder = get_placeholder(index)
             if placeholder is not None:
                 serialized_value = placeholder
             else:
@@ -36,7 +36,7 @@ def descript_data_object(  # noqa: PLR0913
     for argument_name, value in kwargs.items():
         decider = real_filters.get(argument_name, lambda x: True)  # noqa: ARG005
         if decider(value):
-            placeholder = get_placehlder(argument_name)
+            placeholder = get_placeholder(argument_name)
             if placeholder is not None:
                 serialized_value = placeholder
             else:
