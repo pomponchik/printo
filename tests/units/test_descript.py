@@ -1,6 +1,7 @@
 from typing import Any
 
 import pytest
+from sigmatch.errors import SignatureMismatchError
 
 from printo import descript_data_object, not_none
 
@@ -235,3 +236,8 @@ def test_simple_placeholders():
     assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'lol': 'kek', 'kek': 'lol'}, placeholders={'lol': '***', 0: '***', 3: '***'}) == 'ClassName(***, 2, 3, ***, lol=***, kek=\'lol\')'
     assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'lol': 'kek', 'kek': 'lol'}, placeholders={'lol': '***', 0: '***', 3: '***', 'kek': '&'}) == 'ClassName(***, 2, 3, ***, lol=***, kek=&)'
     assert descript_data_object('ClassName', (1, 2, 3, lambda x: x), {'lol': 'kek', 'kek': 'lol'}, placeholders={'lol': '🔒', 0: '***', 3: '***', 'kek': '&'}) == 'ClassName(***, 2, 3, ***, lol=🔒, kek=&)'
+
+
+def test_wrong_serializator_callback():
+    with pytest.raises(SignatureMismatchError):
+        descript_data_object('ClassName', (1, 2, 3), {'lol': 'kek'}, serializator=lambda x, y: x + y)
