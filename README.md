@@ -98,9 +98,10 @@ print(
 
 ## Custom display of objects
 
-By default, all your objects are serialized in the same way as the standard [`repr`](https://docs.python.org/3/library/functions.html#repr) function does. There are only 2 exceptions:
+By default, all your objects are serialized in the same way as the standard [`repr`](https://docs.python.org/3/library/functions.html#repr) function does. There are only 3 exceptions:
 
 - Ordinary functions, in their case, instead of the usual text, just the function name is displayed.
+- For classes, the class name is displayed.
 - Lambda functions, just the `λ` symbol is displayed instead. This is done because there is no reliable way to display the source code of a lambda function in Python.
 
 You can use your own function as a repr for all your objects, use the `serializator` parameter for this:
