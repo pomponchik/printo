@@ -1,4 +1,4 @@
-from inspect import isfunction, isclass
+from inspect import isclass, isfunction
 from typing import Any
 
 
