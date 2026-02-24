@@ -1,4 +1,4 @@
-from inspect import isfunction
+from inspect import isfunction, isclass
 from typing import Any
 
 
@@ -10,5 +10,8 @@ def superrepr(value: Any) -> str:
             return 'λ'
 
         return result
+
+    if isclass(value):
+        return value.__name__
 
     return repr(value)

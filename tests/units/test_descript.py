@@ -246,3 +246,10 @@ def test_wrong_serializator_callback():
 def test_wrong_filter_callback():
     with pytest.raises(SignatureMismatchError):
         descript_data_object('ClassName', (), {'lol': 1, 'kek': 2}, filters={'kek': lambda x, y: x + y})
+
+
+def test_print_classes():
+    class SomeClass:
+        pass
+
+    assert descript_data_object('ClassName', (int, str, SomeClass), {'lol': int, 'kek': str, 'cheburek': SomeClass}) == 'ClassName(int, str, SomeClass, lol=int, kek=str, cheburek=SomeClass)'
